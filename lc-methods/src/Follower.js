@@ -14,9 +14,10 @@ class Follower extends React.Component {
       const { follower } = this.props;
       console.log(`Follower: Component Renders`, follower);
       return(
-        <div className="card">
-        <div><img src={`${follower.avatar_url}`} alt=""/></div>
-        <div>{follower.login}</div>
+        <div className="follower">
+          <div className="follower-content"><img src={`${follower.avatar_url}`} alt=""/>
+            <p>{follower.login}</p>
+          </div>
         </div>
     )};
 

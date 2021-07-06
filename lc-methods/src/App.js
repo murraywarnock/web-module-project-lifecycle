@@ -16,6 +16,7 @@ class App extends React.Component {
               this.setState({
                 user: resp.data
               });
+              // 2nd axios call to get followers within .then of first call
               axios.get(`https://api.github.com/users/${this.state.name}/followers`)
               .then(resp=> {
                 // console.log(resp);
@@ -35,15 +36,17 @@ class App extends React.Component {
   }
 
   render() {
-      return(<div className="App">
-          <h1>{`Github data for ${this.state.user.name}`}</h1>
-          <div className="card">
-          <div><img src={`${this.state.user.avatar_url}`} alt=""/></div>
-          <div>{this.state.user.name}</div>
-          </div>
+      return(
+      <div className="App">
+        <h1>{`Github data for ${this.state.user.name}`}</h1>
+        <div className="card">
+          <img src={`${this.state.user.avatar_url}`} alt=""/>
+        <div>{this.state.user.name}</div>
           <h2>Followers</h2>
-         <UserCard followers={this.state.followers}/>
-
+        </div>
+        <div className="follower-container">
+          <UserCard followers={this.state.followers}/>
+         </div>
       </div>);
   }
 }
