@@ -11,12 +11,14 @@ class Follower extends React.Component {
   }
 
   render() {
-      const { follower } = this.props;
-      console.log(`Follower: Component Renders`, follower);
+      const { follower, seeFollowers } = this.props;
       return(
         <div className="follower">
           <div className="follower-content"><img src={`${follower.avatar_url}`} alt=""/>
             <p>{follower.login}</p>
+            <div className="see-followers" onClick={()=>{this.props.seeFollowers(follower.login)}}>
+              SEE FOLLOWERS
+            </div>
           </div>
         </div>
     )};

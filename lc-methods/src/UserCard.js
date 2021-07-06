@@ -16,7 +16,7 @@ class UserCard extends React.Component {
          return(
            <>
             {this.props.followers.map(follower => (
-                <Follower follower={follower} />
+                <Follower follower={follower} seeFollowers={this.props.seeFollowers}/>
             ))}
           </>
           );
