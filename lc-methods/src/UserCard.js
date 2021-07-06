@@ -1,26 +1,26 @@
 import React from 'react';
 import Follower from './Follower';
 
-
 class UserCard extends React.Component {
 
+  componentDidMount() {
+  }  
 
-    componentDidMount() {
+  componentDidUpdate() {
+    // console.log("UserCard: Component Updates");
+  }
     
-    }    
-      componentDidUpdate() {
-        console.log("UserCard: Component Updates");
-      }
-    
-      render() {
-         return(
-           <>
-            {this.props.followers.map(follower => (
-                <Follower follower={follower} seeFollowers={this.props.seeFollowers}/>
-            ))}
-          </>
-          );
-      }
+  render() {
+      return(
+        <>
+        {this.props.followers.map(follower => (
+          <div key={follower.name}>
+            <Follower follower={follower} seeFollowers={this.props.seeFollowers}/>
+          </div>
+        ))}
+      </>
+      );
+  }
 }
 
 export default UserCard;

@@ -10,21 +10,18 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-      console.log("componentDidMount state = ", this.state);
-      this.getData();
+      this.getData(this.state.name);
   }
 
-  getData = () => {
-    axios.get(`https://api.github.com/users/${this.state.name}`)
-    .then(resp=> {
-        this.setState({
-          user: resp.data
-        });
-        // 2nd axios call to get followers within .then of first call
-        axios.get(`https://api.github.com/users/${this.state.name}/followers`)
-        .then(resp=> {
+  getData = (name) => {
+    axios.get(`https://api.github.com/users/${name}`)
+    .then(respUser=> { 
+       axios.get(`https://api.github.com/users/${name}/followers`)
+        .then(respFollowers=> {
             this.setState({
-              followers: resp.data
+              name: name,
+              user: respUser.data,
+              followers: respFollowers.data
             });
         })
         .catch(err => {
@@ -36,15 +33,9 @@ class App extends React.Component {
     });
   }
 
-  seeFollowers = (id) => {
-    console.log("seeFollowers called: id = ", id);
-    this.setState({
-      followers: [],
-      user: {},
-      name: id    
-  })
-  this.getData();
-};
+  seeFollowers = (name) => {
+    this.getData(name);
+  }
 
   render() {
       return(
